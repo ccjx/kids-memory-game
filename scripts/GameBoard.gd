@@ -143,12 +143,12 @@ func check_match() -> void:
 		if pairs_found == total_pairs:
 			show_victory_screen()
 	else:
-		# No match - show error feedback, then flip back after 5 seconds
+		# No match - show error feedback, then flip back after 2 seconds
 		first_tile.play_error_animation()
 		second_tile.play_error_animation()
 		await get_tree().create_timer(0.5).timeout  # Wait for blink animation
 		
-		await get_tree().create_timer(4.5).timeout  # Remaining time to 5s total
+		await get_tree().create_timer(1.5).timeout  # Remaining time to 2s total
 		first_tile.flip_back()
 		second_tile.flip_back()
 		
@@ -159,6 +159,35 @@ func check_match() -> void:
 
 func show_victory_screen() -> void:
 	victory_panel.show()
+	
+	# Play victory animations
+	play_victory_animations()
+
+func play_victory_animations() -> void:
+	# Trophy rise from bottom
+	await get_tree().create_timer(0.3).timeout
+	var trophy_scene = preload("res://scenes/effects/TrophyRise.tscn")
+	var trophy = trophy_scene.instantiate()
+	victory_panel.add_child(trophy)
+	trophy.position = Vector2(victory_panel.size.x / 2, victory_panel.size.y + 100)
+	
+	var trophy_tween = create_tween().set_parallel(true)
+	trophy_tween.tween_property(trophy, "position:y", victory_panel.size.y / 2 - 150, 1.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	trophy_tween.tween_property(trophy, "rotation", deg_to_rad(360), 1.2)
+	
+	# Fireworks display
+	await get_tree().create_timer(0.5).timeout
+	for i in range(5):
+		var firework_scene = preload("res://scenes/effects/Firework.tscn")
+		var firework = firework_scene.instantiate()
+		victory_panel.add_child(firework)
+		
+		var random_x = randf_range(100, victory_panel.size.x - 100)
+		var random_y = randf_range(100, victory_panel.size.y - 200)
+		firework.position = Vector2(random_x, random_y)
+		firework.emitting = true
+		
+		await get_tree().create_timer(0.4).timeout
 
 func _on_back_pressed() -> void:
 	SceneManager.goto_main_menu()

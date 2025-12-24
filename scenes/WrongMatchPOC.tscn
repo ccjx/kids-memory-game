@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvxabm5pk2whe"]
+[gd_scene load_steps=2 format=3 uid="uid://b7xqm3pk2whe"]
 
-[ext_resource type="Script" path="res://scripts/AnimationPOC.gd" id="1_poc_script"]
+[ext_resource type="Script" path="res://scripts/WrongMatchPOC.gd" id="1_wrong_script"]
 
-[node name="AnimationPOC" type="Control"]
+[node name="WrongMatchPOC" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_poc_script")
+script = ExtResource("1_wrong_script")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -39,7 +39,7 @@ theme_override_constants/separation = 30
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "Animation POC"
+text = "Wrong Match Animation POC"
 horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -50,47 +50,6 @@ theme_override_font_sizes/font_size = 24
 text = "Back to Menu"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VictorySection" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="VictoryTitle" type="Label" parent="MarginContainer/VBoxContainer/VictorySection"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Victory Animations"
-
-[node name="VictoryButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VictorySection"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 20
-
-[node name="ConfettiBurst" type="Button" parent="MarginContainer/VBoxContainer/VictorySection/VictoryButtons"]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Confetti Burst"
-
-[node name="StarCascade" type="Button" parent="MarginContainer/VBoxContainer/VictorySection/VictoryButtons"]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Star Cascade"
-
-[node name="TrophyRise" type="Button" parent="MarginContainer/VBoxContainer/VictorySection/VictoryButtons"]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Trophy Rise"
-
-[node name="FireworksDisplay" type="Button" parent="MarginContainer/VBoxContainer/VictorySection/VictoryButtons"]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Fireworks Display"
-
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="WrongMatchSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -140,6 +99,15 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(400, 300)
 layout_mode = 2
 
+[node name="Background" type="ColorRect" parent="MarginContainer/VBoxContainer/DemoArea/DemoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.3, 0.35, 1)
+
 [node name="DemoCard" type="TextureRect" parent="MarginContainer/VBoxContainer/DemoArea/DemoPanel"]
 layout_mode = 1
 anchors_preset = 8
@@ -157,11 +125,22 @@ pivot_offset = Vector2(75, 100)
 expand_mode = 1
 stretch_mode = 5
 
+[node name="CardBorder" type="Panel" parent="MarginContainer/VBoxContainer/DemoArea/DemoPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -103.0
+offset_right = 78.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VictorySection/VictoryButtons/ConfettiBurst" to="." method="_on_confetti_burst_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VictorySection/VictoryButtons/StarCascade" to="." method="_on_star_cascade_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VictorySection/VictoryButtons/TrophyRise" to="." method="_on_trophy_rise_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VictorySection/VictoryButtons/FireworksDisplay" to="." method="_on_fireworks_display_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/WrongMatchSection/WrongMatchButtons/ShakeRedFlash" to="." method="_on_shake_red_flash_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/WrongMatchSection/WrongMatchButtons/BounceBack" to="." method="_on_bounce_back_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/WrongMatchSection/WrongMatchButtons/WobbleDim" to="." method="_on_wobble_dim_pressed"]
