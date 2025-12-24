@@ -4,6 +4,8 @@
 |---------|-------------|-------|--------|
 | P-R000 | R000 | Example Implementation Plan | Proposed |
 | P-R001 | R001 | Kids Memory Game Core Features Implementation | Implemented |
+| P-R002 | R002 | Multi-Resolution Support and Enhanced Visual Feedback | Proposed |
+| P-R003 | R003 | Animation POC for Victory and Wrong Match Effects | Proposed |
 
 ## Status Values
 - **Proposed**: Plan created and awaiting approval
