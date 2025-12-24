@@ -115,6 +115,7 @@ Time/complexity estimate if applicable
 
 - ✅ Always create requirement files before implementation plans
 - ✅ Update both index files when adding new requirements or plans
+- ✅ **When user provides clarifications or updates to requirements, always update the corresponding requirement file(s)**
 - ✅ Ask clarifying questions rather than making assumptions
 - ✅ NEVER implement without explicit user approval of the plan
 - ✅ Maintain traceability: R{ID} ↔ P-R{ID}
