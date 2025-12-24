@@ -43,6 +43,10 @@ func set_matched() -> void:
 	is_flipped = true
 	# Could add a matched animation or effect here
 
+func play_error_animation() -> void:
+	if animation_player.has_animation("blink_error"):
+		animation_player.play("blink_error")
+
 func _on_texture_rect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -50,7 +54,18 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 				tile_clicked.emit(self)
 
 func _on_animation_player_animation_finished(anim_name: String) -> void:
+	# Texture swap happens at midpoint of animation
 	if anim_name == "flip_to_front":
-		texture_rect.texture = front_texture
+		pass  # Texture already swapped at 0.15s
 	elif anim_name == "flip_to_back":
-		texture_rect.texture = back_texture
+		pass  # Texture already swapped at 0.15s
+
+# Called when animation reaches midpoint (scale.x = 0)
+func _process(_delta: float) -> void:
+	if animation_player.is_playing():
+		# Check if we're at the midpoint and need to swap texture
+		if texture_rect.scale.x <= 0.05 and texture_rect.scale.x >= -0.05:
+			if is_flipped and texture_rect.texture != front_texture:
+				texture_rect.texture = front_texture
+			elif not is_flipped and texture_rect.texture != back_texture:
+				texture_rect.texture = back_texture

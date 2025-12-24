@@ -4,6 +4,7 @@ extends Node
 const MAIN_MENU = "res://scenes/MainMenu.tscn"
 const GAME_SCENE = "res://scenes/GameScene.tscn"
 const SETTINGS_SCENE = "res://scenes/SettingsScene.tscn"
+const ANIMATION_POC = "res://scenes/AnimationPOC.tscn"
 
 var _is_transitioning = false
 
@@ -51,3 +52,6 @@ func goto_game() -> void:
 
 func goto_settings() -> void:
 	change_scene(SETTINGS_SCENE)
+
+func goto_animation_poc() -> void:
+	change_scene(ANIMATION_POC)

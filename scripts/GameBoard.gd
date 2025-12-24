@@ -18,7 +18,7 @@ const ANIMAL_IMAGES = [
 	"res://assets/images/animals/zebra.jpg"
 ]
 
-@onready var grid_container: GridContainer = $VBoxContainer/GridContainer
+@onready var grid_container: GridContainer = $VBoxContainer/CenterContainer/GridContainer
 @onready var back_button: Button = $VBoxContainer/BackButton
 @onready var victory_panel: Panel = $VictoryPanel
 @onready var play_again_button: Button = $VictoryPanel/VBoxContainer/PlayAgainButton
@@ -61,16 +61,35 @@ func setup_board() -> void:
 	var tile_count = GameSettings.get_tile_count()
 	total_pairs = tile_count / 2
 	
+	# Calculate dynamic tile size based on viewport
+	var viewport_size = get_viewport_rect().size
+	var available_width = viewport_size.x - 100  # Leave margins
+	var available_height = viewport_size.y - 200  # Leave space for UI
+	
 	# Set grid columns based on tile count
+	var columns = 4
+	var rows = tile_count / columns
 	match tile_count:
 		8:
-			grid_container.columns = 4
+			columns = 4
+			rows = 2
 		12:
-			grid_container.columns = 4
+			columns = 4
+			rows = 3
 		16:
-			grid_container.columns = 4
+			columns = 4
+			rows = 4
 		24:
-			grid_container.columns = 6
+			columns = 6
+			rows = 4
+	
+	grid_container.columns = columns
+	
+	# Calculate tile size to fit in available space
+	var tile_width = (available_width - (columns - 1) * 10) / columns  # 10px spacing
+	var tile_height = (available_height - (rows - 1) * 10) / rows
+	var tile_size = min(tile_width, tile_height)
+	tile_size = clamp(tile_size, 80, 200)  # Min 80px, max 200px
 	
 	# Create pairs
 	var tile_data = []
@@ -86,6 +105,7 @@ func setup_board() -> void:
 	for data in tile_data:
 		var tile = TILE_SCENE.instantiate()
 		grid_container.add_child(tile)
+		tile.custom_minimum_size = Vector2(tile_size, tile_size)
 		tile.setup(data.id, data.texture, back_texture)
 		tile.tile_clicked.connect(_on_tile_clicked)
 
@@ -123,8 +143,12 @@ func check_match() -> void:
 		if pairs_found == total_pairs:
 			show_victory_screen()
 	else:
-		# No match - flip back after 5 seconds
-		await get_tree().create_timer(5.0).timeout
+		# No match - show error feedback, then flip back after 5 seconds
+		first_tile.play_error_animation()
+		second_tile.play_error_animation()
+		await get_tree().create_timer(0.5).timeout  # Wait for blink animation
+		
+		await get_tree().create_timer(4.5).timeout  # Remaining time to 5s total
 		first_tile.flip_back()
 		second_tile.flip_back()
 		

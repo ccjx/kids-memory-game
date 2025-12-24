@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5yv7qxr8n1jm"]
+
+[sub_resource type="Curve" id="Curve_1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_1"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.2, 0.2, 1, 1, 1, 0.2, 1, 0.2, 0.5, 1, 0)
+
+[node name="ConfettiBurst" type="CPUParticles2D"]
+emitting = false
+amount = 50
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.5
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 400)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_amount_min = 3.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_1")
+color_ramp = SubResource("Gradient_1")

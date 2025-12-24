@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi8uh5yx3v2mk"]
+
+[ext_resource type="Script" path="res://scripts/effects/TrophyRise.gd" id="1_trophy_script"]
+
+[node name="TrophyRise" type="Node2D"]
+script = ExtResource("1_trophy_script")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -50.0
+offset_top = -30.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_font_sizes/font_size = 64
+text = "🏆"
+horizontal_alignment = 1
+vertical_alignment = 1

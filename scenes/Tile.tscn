@@ -1,6 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://ce7rbh3p5k1om"]
+[gd_scene load_steps=7 format=3 uid="uid://ce7rbh3p5k1om"]
 
 [ext_resource type="Script" path="res://scripts/Tile.gd" id="1_tile_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_error"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_flip_front"]
 resource_name = "flip_to_front"
@@ -8,14 +16,14 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/path = NodePath("TextureRect:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0, 1), Vector2(1, 1)]
+"values": [1.0, 0.0, 1.0]
 }
 
 [sub_resource type="Animation" id="Animation_flip_back"]
@@ -24,18 +32,35 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/path = NodePath("TextureRect:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0, 1), Vector2(1, 1)]
+"values": [1.0, 0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_blink_error"]
+resource_name = "blink_error"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ErrorOutline:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_animations"]
 _data = {
+"blink_error": SubResource("Animation_blink_error"),
 "flip_to_back": SubResource("Animation_flip_back"),
 "flip_to_front": SubResource("Animation_flip_front")
 }
@@ -45,6 +70,16 @@ custom_minimum_size = Vector2(120, 120)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_tile_script")
+
+[node name="ErrorOutline" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_error")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

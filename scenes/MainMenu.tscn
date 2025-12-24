@@ -51,6 +51,11 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Settings"
 
+[node name="AnimationPOCButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Animation POC"
+
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
