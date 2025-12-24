@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ce7rbh3p5k1om"]
+[gd_scene load_steps=5 format=3 uid="uid://ce7rbh3p5k1om"]
 
 [ext_resource type="Script" path="res://scripts/Tile.gd" id="1_tile_script"]
 
@@ -34,6 +34,12 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(0, 1), Vector2(1, 1)]
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_animations"]
+_data = {
+"flip_to_back": SubResource("Animation_flip_back"),
+"flip_to_front": SubResource("Animation_flip_front")
+}
+
 [node name="Tile" type="Control"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 3
@@ -49,12 +55,6 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_animations"]
-_data = {
-"flip_to_back": SubResource("Animation_flip_back"),
-"flip_to_front": SubResource("Animation_flip_front")
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

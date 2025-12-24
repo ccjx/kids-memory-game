@@ -2,20 +2,20 @@ extends Control
 
 const TILE_SCENE = preload("res://scenes/Tile.tscn")
 
-# Image paths for Singapore landmarks
-const LANDMARK_IMAGES = [
-	"res://assets/images/landmarks/marina_bay_sands.jpg",
-	"res://assets/images/landmarks/merlion.jpg",
-	"res://assets/images/landmarks/gardens_by_the_bay.jpg",
-	"res://assets/images/landmarks/singapore_flyer.jpg",
-	"res://assets/images/landmarks/esplanade.jpg",
-	"res://assets/images/landmarks/artscience_museum.jpg",
-	"res://assets/images/landmarks/sentosa.jpg",
-	"res://assets/images/landmarks/chinatown.jpg",
-	"res://assets/images/landmarks/little_india.jpg",
-	"res://assets/images/landmarks/raffles_hotel.jpg",
-	"res://assets/images/landmarks/orchard_road.jpg",
-	"res://assets/images/landmarks/jewel_changi.jpg"
+# Image paths for animals
+const ANIMAL_IMAGES = [
+	"res://assets/images/animals/cat.jpg",
+	"res://assets/images/animals/dog.jpg",
+	"res://assets/images/animals/elephant.jpg",
+	"res://assets/images/animals/fox.jpg",
+	"res://assets/images/animals/giraffe.jpg",
+	"res://assets/images/animals/lion.jpg",
+	"res://assets/images/animals/monkey.jpg",
+	"res://assets/images/animals/panda.jpg",
+	"res://assets/images/animals/penguin.jpg",
+	"res://assets/images/animals/rabbit.jpg",
+	"res://assets/images/animals/tiger.jpg",
+	"res://assets/images/animals/zebra.jpg"
 ]
 
 @onready var grid_container: GridContainer = $VBoxContainer/GridContainer
@@ -75,7 +75,7 @@ func setup_board() -> void:
 	# Create pairs
 	var tile_data = []
 	for i in range(total_pairs):
-		var texture = load(LANDMARK_IMAGES[i])
+		var texture = load(ANIMAL_IMAGES[i])
 		tile_data.append({"id": i, "texture": texture})
 		tile_data.append({"id": i, "texture": texture})
 	
