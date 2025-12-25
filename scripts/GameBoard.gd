@@ -23,6 +23,7 @@ const ANIMAL_IMAGES = [
 @onready var victory_panel: Panel = $VictoryPanel
 @onready var play_again_button: Button = $VictoryPanel/VBoxContainer/PlayAgainButton
 @onready var menu_button: Button = $VictoryPanel/VBoxContainer/MenuButton
+@onready var complete_label: Label = $VictoryPanel/VBoxContainer/Panel/CompleteLabel
 
 var back_texture: Texture2D
 var first_tile: Control = null
@@ -32,6 +33,17 @@ var total_pairs: int = 0
 var is_checking: bool = false
 
 func _ready() -> void:
+	# Apply UI scaling with pivot at top-left
+	var scale_factor = GameSettings.get_ui_scale_factor()
+	pivot_offset = Vector2.ZERO
+	scale = Vector2.ONE * scale_factor
+	
+	# Scale fonts
+	back_button.add_theme_font_size_override("font_size", int(24 * scale_factor))
+	complete_label.add_theme_font_size_override("font_size", int(64 * scale_factor))
+	play_again_button.add_theme_font_size_override("font_size", int(28 * scale_factor))
+	menu_button.add_theme_font_size_override("font_size", int(28 * scale_factor))
+	
 	# Load back texture
 	back_texture = load("res://assets/images/ui/card_back.svg")
 	

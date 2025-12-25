@@ -51,11 +51,6 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Settings"
 
-[node name="WrongMatchPOCButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-text = "Wrong Match POC"
-
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2

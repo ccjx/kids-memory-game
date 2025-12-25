@@ -5,6 +5,9 @@ const SECTION = "game"
 const TILE_COUNT_KEY = "tile_count"
 const RESOLUTION_KEY = "resolution"
 
+# Base resolution for UI scaling calculations
+const BASE_RESOLUTION_WIDTH = 1920.0
+
 # Resolution presets
 enum Resolution {
 	DESKTOP = 0,        # 1920x1080
@@ -20,10 +23,12 @@ const RESOLUTION_SIZES = {
 
 var tile_count: int = 8  # Default: 8 tiles (4 pairs)
 var current_resolution: Resolution = Resolution.DESKTOP
+var ui_scale_factor: float = 1.0
 
 func _ready() -> void:
 	load_settings()
 	apply_resolution()
+	apply_ui_scaling()
 
 func load_settings() -> void:
 	var config = ConfigFile.new()
@@ -58,9 +63,20 @@ func set_resolution(res: Resolution) -> void:
 	current_resolution = res
 	save_settings()
 	apply_resolution()
+	apply_ui_scaling()
 
 func get_resolution() -> Resolution:
 	return current_resolution
+
+func get_ui_scale_factor() -> float:
+	return ui_scale_factor
+
+func calculate_scale_factor() -> float:
+	var size = RESOLUTION_SIZES[current_resolution]
+	return size.x / BASE_RESOLUTION_WIDTH
+
+func apply_ui_scaling() -> void:
+	ui_scale_factor = calculate_scale_factor()
 
 func apply_resolution() -> void:
 	var size = RESOLUTION_SIZES[current_resolution]
